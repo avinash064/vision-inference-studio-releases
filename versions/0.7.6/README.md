@@ -2,6 +2,8 @@
 
 **Released:** 2026-11-20 · **Package:** [vision-inference-studio_0.7.6_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.6/vision-inference-studio_0.7.6_amd64.deb) (116 MB) · **Platform:** Ubuntu / Debian x86_64
 
+> **Known issue — use [0.7.7](../0.7.7/README.md) instead.** Installing or updating the private Python runtime fails with `ResolutionImpossible` ("Cannot install boto3<2 and >=1.35"). Reusing an existing Python environment works, but if none is found the runtime can't be installed. 0.7.7 fixes this; everything else is the same.
+
 This release adds model training, DeepStream deployment export and optional NVIDIA TAO training, and makes installation reuse a Python environment you already have. It also includes the 0.7.5 changes (cloud storage and datasets), which were not published as a separate package.
 
 ## What's new
@@ -62,6 +64,7 @@ Upgrading from any earlier version keeps your weights, workflows, recipes, datas
 
 ## Known limitations
 
+- **Private runtime install fails** (boto3 version conflict). Fixed in [0.7.7](../0.7.7/README.md).
 - **TAO:** only the preflight was run on real hardware. Real TAO training was **not tested** because the test machine lacked disk space and GPU memory.
 - **Installer:** the fallback that installs the full private runtime during `apt install` was **not tested** end to end on a clean machine.
 - **Real S3:** dataset acceptance was **not tested**; Google Cloud Storage was.

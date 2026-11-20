@@ -4,7 +4,8 @@ One folder per published version, newest first. Each README lists what changed, 
 
 | Version | Highlights |
 |---|---|
-| [0.7.6](0.7.6/README.md) | Training, DeepStream export, optional NVIDIA TAO, cloud storage and datasets, installer reuses an existing Python environment |
+| [0.7.7](0.7.7/README.md) | Fix: the private Python runtime installs again (boto3 version conflict in 0.7.5/0.7.6) |
+| [0.7.6](0.7.6/README.md) | **Private runtime install fails, use 0.7.7.** Training, DeepStream export, optional NVIDIA TAO, cloud storage and datasets, installer reuses an existing Python environment |
 | [0.7.4](0.7.4/README.md) | Typed multi-model Canvas, partial runs and caching, Auto Annotation v0.1 |
 | [0.5.0](0.5.0/README.md) | RF-DETR feature runtime: feature extraction, difference and heatmap nodes |
 | [0.4.0](0.4.0/README.md) | Grounding DINO, SAM, SAM 2.1, SAM 3 and chaiNNer nodes |

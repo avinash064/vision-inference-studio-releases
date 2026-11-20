@@ -6,11 +6,12 @@ This repository contains **installable packages, the user manual and release not
 
 ## Download
 
-**Latest version: 0.7.6** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.6) · [What's new](versions/0.7.6/README.md)
+**Latest version: 0.7.7** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.7) · [What's new](versions/0.7.7/README.md)
 
 | Version | Package | Notes |
 |---|---|---|
-| **0.7.6** (latest) | [vision-inference-studio_0.7.6_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.6/vision-inference-studio_0.7.6_amd64.deb) | [Release notes](versions/0.7.6/README.md) |
+| **0.7.7** (latest) | [vision-inference-studio_0.7.7_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.7/vision-inference-studio_0.7.7_amd64.deb) | [Release notes](versions/0.7.7/README.md) |
+| 0.7.6 | [vision-inference-studio_0.7.6_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.6/vision-inference-studio_0.7.6_amd64.deb) | [Release notes](versions/0.7.6/README.md) — **private runtime install fails; use 0.7.7** |
 | 0.7.4 | [vision-inference-studio_0.7.4_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.4/vision-inference-studio_0.7.4_amd64.deb) | [Release notes](versions/0.7.4/README.md) |
 | 0.5.0 | [vision-inference-studio_0.5.0_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.5.0/vision-inference-studio_0.5.0_amd64.deb) | [Release notes](versions/0.5.0/README.md) |
 | 0.4.0 | [vision-inference-studio_0.4.0_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.4.0/vision-inference-studio_0.4.0_amd64.deb) | [Release notes](versions/0.4.0/README.md) |
@@ -21,18 +22,18 @@ Use the latest version unless you need an older one for a specific reason. Older
 
 The packages are attached to each version's [GitHub Release](https://github.com/avinash064/vision-inference-studio-releases/releases) because they are larger than GitHub allows for files inside a repository. Checksums for all of them are in [SHA256SUMS](SHA256SUMS).
 
-## Quick start (0.7.6)
+## Quick start (0.7.7)
 
 **Requirements:** 64-bit Ubuntu or Debian (x86_64) with a desktop session. An NVIDIA GPU with a recent driver is optional; without one the app uses the CPU.
 
 1. Download the `.deb` and check it:
    ```bash
-   sha256sum vision-inference-studio_0.7.6_amd64.deb
-   # must match: 6bf7a55a4abf08b5df867061b533ef2c32d4ef0eab61c73a20a8be16c6f2038c
+   sha256sum vision-inference-studio_0.7.7_amd64.deb
+   # must match: 3123f5afaf3cb7a377549645371444cfc8eb6ee9ee556f43bfd1a759dc505f18
    ```
 2. Install it:
    ```bash
-   sudo apt install ./vision-inference-studio_0.7.6_amd64.deb
+   sudo apt install ./vision-inference-studio_0.7.7_amd64.deb
    ```
    The installer looks for a Python environment on your computer that already has the required packages and uses it. If none is found, it installs a private runtime for you (10–30 minutes, needs internet).
 3. Start **Vision Inference Studio** from the application menu.

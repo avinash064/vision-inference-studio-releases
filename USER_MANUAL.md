@@ -1,6 +1,6 @@
 # Vision Inference Studio — User Manual
 
-This manual covers **version 0.7.6**. For earlier versions, see the README in [versions/](versions/); features that arrived later are marked with the version that added them.
+This manual covers **version 0.7.7** (the same features as 0.7.6, with the runtime install fixed). For earlier versions, see the README in [versions/](versions/); features that arrived later are marked with the version that added them.
 
 ## Contents
 
@@ -57,7 +57,7 @@ Optional extras:
 ### Install
 
 ```bash
-sudo apt install ./vision-inference-studio_0.7.6_amd64.deb
+sudo apt install ./vision-inference-studio_0.7.7_amd64.deb
 ```
 
 Then start **Vision Inference Studio** from the application menu, or run `vision-inference-studio` in a terminal.
@@ -98,7 +98,7 @@ Your choice is saved in `~/.config/vision-inference-studio/python-runtime`. A pa
 
 Install the newer `.deb` the same way. Your weights, workflows, recipes, benchmarks, datasets, training runs, exports and settings are kept. If the private runtime needs new packages, the installer updates it, or the app shows **Runtime update required**; click **Update Runtime**.
 
-To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.6_amd64.deb`, because `apt` skips a version that is already installed.
+To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.7_amd64.deb`, because `apt` skips a version that is already installed.
 
 ## 4. Your first workflow
 
@@ -291,6 +291,7 @@ Upgrading or uninstalling never deletes these folders.
 
 | Problem | What to do |
 |---|---|
+| Runtime install fails with `ResolutionImpossible` / "Cannot install boto3<2 and >=1.35" | A bug in 0.7.5 and 0.7.6. Install 0.7.7, then click **Update Runtime**. |
 | **Inference Runtime Setup** appears on first launch | The runtime wasn't prepared during installation. Click **Install Runtime**. |
 | Runtime setup fails while downloading | Check your internet connection or proxy, then **Runtime → Repair Runtime**. Details are in `runtime-setup.log`. |
 | The installer picked an environment you don't want | Run `vision-inference-studio-setup --use-python /path/to/python`, or delete `~/.config/vision-inference-studio/python-runtime` and run `vision-inference-studio-setup --mode auto`. |
