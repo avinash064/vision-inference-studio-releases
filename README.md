@@ -4,6 +4,10 @@ Vision Inference Studio is a desktop app for building and running image and vide
 
 This repository contains **installable packages, the user manual and release notes only**. It holds no source code.
 
+![Vision Inference Studio 0.7.7: Grounding DINO finds a bus and four people on the Canvas](docs/images/studio-0.7.7-canvas-grounding-dino.png)
+
+*Version 0.7.7: an Image → Grounding DINO → Detection Preview workflow on the Canvas. The prompt `bus, person` finds 5 objects in 272 ms on an RTX 4050; Live Output shows the labelled result with timings, GPU memory and the execution log.*
+
 ## Download
 
 **Latest version: 0.7.7** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.7) · [What's new](versions/0.7.7/README.md)

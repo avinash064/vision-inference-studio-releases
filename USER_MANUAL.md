@@ -102,6 +102,8 @@ To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.7
 
 ## 4. Your first workflow
 
+![A finished workflow: Image → Model (Grounding DINO) → Detection Preview, with the result in Live Output](docs/images/studio-0.7.7-canvas-grounding-dino.png)
+
 1. Open **Canvas**.
 2. On the empty Canvas, choose a starter: **YOLO**, **RF-DETR**, **RT-DETR** or **Segmentation**. This adds an Image input, a Model node and a matching preview, already connected.
 3. Select the **Image** node and upload a test image, or choose one you added before.
@@ -116,6 +118,8 @@ To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.7
 The result appears in the **Live Output** panel at the bottom: boxes or masks drawn on the image, the detection count, and pre-processing, inference and post-processing times with GPU memory.
 
 ### The Live Output panel
+
+![Live Output enlarged to show the full prediction](docs/images/studio-0.7.7-prediction-enlarged.png)
 
 - **Original / Prediction** switches between the input and the drawn result without re-running.
 - **Enlarge** (the maximise icon at the right of the toolbar) grows the panel to nearly full height; click it again to restore.
