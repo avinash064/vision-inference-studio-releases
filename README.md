@@ -10,13 +10,14 @@ This repository contains **installable packages, the user manual and release not
 
 ## Download
 
-**Latest version: 0.7.8** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.8) · [What's new](versions/0.7.8/README.md)
+**Latest version: 0.7.9** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.9) · [What's new](versions/0.7.9/README.md)
 
-**Have an NVIDIA RTX 50-series GPU?** Workflows don't run on these GPUs in 0.7.7 and earlier, so use 0.7.8.
+The installer picks the PyTorch build for your computer's GPU and driver: CPU-only, CUDA 11.8, CUDA 12.1, or CUDA 12.8 for RTX 50-series GPUs. Workflows don't run on RTX 50-series GPUs in 0.7.7 and earlier.
 
 | Version | Package | Notes |
 |---|---|---|
-| **0.7.8** (latest) | [vision-inference-studio_0.7.8_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.8/vision-inference-studio_0.7.8_amd64.deb) | [Release notes](versions/0.7.8/README.md) |
+| **0.7.9** (latest) | [vision-inference-studio_0.7.9_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.9/vision-inference-studio_0.7.9_amd64.deb) | [Release notes](versions/0.7.9/README.md) |
+| 0.7.8 | [vision-inference-studio_0.7.8_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.8/vision-inference-studio_0.7.8_amd64.deb) | [Release notes](versions/0.7.8/README.md) |
 | 0.7.7 | [vision-inference-studio_0.7.7_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.7/vision-inference-studio_0.7.7_amd64.deb) | [Release notes](versions/0.7.7/README.md) — models don't run on RTX 50-series GPUs; use 0.7.8 |
 | 0.7.6 | [vision-inference-studio_0.7.6_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.6/vision-inference-studio_0.7.6_amd64.deb) | [Release notes](versions/0.7.6/README.md) — **private runtime install fails; use 0.7.7** |
 | 0.7.4 | [vision-inference-studio_0.7.4_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.4/vision-inference-studio_0.7.4_amd64.deb) | [Release notes](versions/0.7.4/README.md) |
@@ -29,18 +30,18 @@ Use the latest version unless you need an older one for a specific reason. Older
 
 The packages are attached to each version's [GitHub Release](https://github.com/avinash064/vision-inference-studio-releases/releases) because they are larger than GitHub allows for files inside a repository. Checksums for all of them are in [SHA256SUMS](SHA256SUMS).
 
-## Quick start (0.7.8)
+## Quick start (0.7.9)
 
 **Requirements:** 64-bit Ubuntu or Debian (x86_64) with a desktop session. An NVIDIA GPU is optional (driver 525 or newer; 570 or newer for RTX 50-series GPUs). Without one, the app uses the CPU.
 
 1. Download the `.deb` and check it:
    ```bash
-   sha256sum vision-inference-studio_0.7.8_amd64.deb
-   # must match: 5044e43e77b156fc97258ceaff74cec11f75a8a8faeb31fe393ef9fa660c67bd
+   sha256sum vision-inference-studio_0.7.9_amd64.deb
+   # must match: 64ac38f9e87326250c071f5830d0e4531549fc22cf8dce755a7269c41698cb4b
    ```
 2. Install it:
    ```bash
-   sudo apt install ./vision-inference-studio_0.7.8_amd64.deb
+   sudo apt install ./vision-inference-studio_0.7.9_amd64.deb
    ```
    The installer looks for a Python environment on your computer that already has the required packages and uses it. If none is found, it installs a private runtime for you (10–30 minutes, needs internet).
 3. Start **Vision Inference Studio** from the application menu.

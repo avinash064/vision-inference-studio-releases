@@ -1,6 +1,6 @@
 # Vision Inference Studio — User Manual
 
-This manual covers **version 0.7.8** (the features of 0.7.6, the runtime install fix of 0.7.7, and NVIDIA RTX 50-series GPU support added in 0.7.8). For earlier versions, see the README in [versions/](versions/); features that arrived later are marked with the version that added them.
+This manual covers **version 0.7.9** (the features of 0.7.6, the runtime install fix of 0.7.7, RTX 50-series GPU support from 0.7.8, and the PyTorch build matched to your GPU from 0.7.9). For earlier versions, see the README in [versions/](versions/); features that arrived later are marked with the version that added them.
 
 ## Contents
 
@@ -43,7 +43,7 @@ Everything runs locally. Cloud storage and model hubs are used only when you con
 | Operating system | 64-bit Ubuntu or Debian (x86_64) with a desktop session (GNOME, KDE, …) |
 | Disk | About 15 GB free if the private runtime is installed (mostly PyTorch and CUDA libraries), plus space for your weights and datasets |
 | RAM | 16 GB recommended; loading SAM 3 briefly needs 6–7 GB |
-| GPU (optional) | NVIDIA GPU with driver 525 or newer (`nvidia-smi` should work). RTX 50-series and other Blackwell GPUs need version 0.7.8 or newer and driver 570 or newer; see [GPU support](#nvidia-gpu-support-rtx-50-series-078-and-later). Without a GPU, the app uses the CPU, which is much slower. |
+| GPU (optional) | NVIDIA GPU with driver 525 or newer (`nvidia-smi` should work). RTX 50-series and other Blackwell GPUs need version 0.7.8 or newer and driver 570 or newer; see [Which PyTorch is installed](#which-pytorch-is-installed-079-and-later). Without a GPU, the app uses the CPU (the installer then installs the smaller CPU-only PyTorch), which is much slower. |
 | Internet | Needed only if the installer has to download the private runtime, and for cloud storage or model hubs |
 | Python | Not required. The package includes its own Python 3.12. |
 
@@ -57,7 +57,7 @@ Optional extras:
 ### Install
 
 ```bash
-sudo apt install ./vision-inference-studio_0.7.8_amd64.deb
+sudo apt install ./vision-inference-studio_0.7.9_amd64.deb
 ```
 
 Then start **Vision Inference Studio** from the application menu, or run `vision-inference-studio` in a terminal.
@@ -94,15 +94,28 @@ Your choice is saved in `~/.config/vision-inference-studio/python-runtime`. A pa
 
 **Runtime → Status** in the menu bar shows which environment is in use and whether CUDA is available. **Runtime → Repair Runtime** and **Reinstall Runtime** fix a damaged private runtime.
 
-### NVIDIA GPU support: RTX 50-series (0.7.8 and later)
+### Which PyTorch is installed (0.7.9 and later)
 
-The app normally installs PyTorch 2.5.1 built for CUDA 12.1. That build has GPU code for compute capability 5.0 to 9.0: GPUs up to the RTX 40-series, L4 and H100.
+The app's models run on PyTorch. The installer picks the PyTorch build that suits **the GPU and NVIDIA driver of the computer it is installed on**, using what `nvidia-smi` reports:
 
-Blackwell GPUs have compute capability 10.0 or newer. These include the GeForce RTX 5050, 5060, 5070, 5080 and 5090 desktop and laptop GPUs, and RTX PRO Blackwell. That build has no code for them.
+| Your computer | PyTorch installed |
+|---|---|
+| No NVIDIA GPU, or the NVIDIA driver isn't installed | 2.5.1, CPU-only. No CUDA libraries, so about 3 GB less to download. |
+| NVIDIA GPU older than compute capability 5.0 (for example Tesla K80), or a driver older than 450 | 2.5.1, CPU-only. PyTorch can't use these GPUs. |
+| NVIDIA driver 450–524 | 2.5.1 for CUDA 11.8 |
+| NVIDIA driver 525 or newer, GPUs up to the RTX 40-series, L4 and H100 | 2.5.1 for CUDA 12.1 (the tested build) |
+| RTX 50-series (5050, 5060, 5070, 5080, 5090; desktop and laptop), RTX PRO Blackwell and other GPUs of compute capability 10.0 or newer | 2.7.1 for CUDA 12.8 (needs driver 570 or newer; since 0.7.8) |
 
-From 0.7.8, setup reads your GPU's compute capability from `nvidia-smi`. On these GPUs it installs **PyTorch 2.7.1 built for CUDA 12.8** instead, which needs **NVIDIA driver 570 or newer**. You don't need to do anything else:
+If your computer has several GPUs, the newest one decides. Every other package stays at the same tested version.
 
-- A private runtime built for another GPU generation is updated the next time setup runs.
+**Check the choice:** run `vision-inference-studio-setup --print-torch-build`. It prints the build, the reason and your GPU, and installs nothing. `runtime-setup.log` records the same.
+
+**After a driver update or a new GPU,** click **Runtime → Repair Runtime**. Setup rebuilds the private runtime with the matching build and removes the old CUDA libraries. On a computer that got the CPU build because no driver was installed, **Runtime → Status** reminds you to do this.
+
+**To force a build,** set `VIS_TORCH_BUILD` to `cpu`, `cu118`, `cu121` or `cu128` when running `vision-inference-studio-setup`.
+
+More checks for GPUs PyTorch can't use:
+
 - An environment whose PyTorch has no code for your GPU is not picked by the environment search.
 - **Runtime → Status** shows `GPU NOT SUPPORTED BY PYTORCH` when the PyTorch in use can't run on your GPU.
 
@@ -112,13 +125,11 @@ A Python environment you chose yourself is never changed. To make it work on an 
 /path/to/your/python -m pip install --upgrade torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
 ```
 
-To force a build, set `VIS_TORCH_BUILD=cu121` or `VIS_TORCH_BUILD=cu128` when running `vision-inference-studio-setup`.
-
 ### Upgrade
 
 Install the newer `.deb` the same way. Your weights, workflows, recipes, benchmarks, datasets, training runs, exports and settings are kept. If the private runtime needs new packages, the installer updates it, or the app shows **Runtime update required**; click **Update Runtime**.
 
-To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.8_amd64.deb`, because `apt` skips a version that is already installed.
+To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.9_amd64.deb`, because `apt` skips a version that is already installed.
 
 ## 4. Your first workflow
 
@@ -315,14 +326,14 @@ Upgrading or uninstalling never deletes these folders.
 
 | Problem | What to do |
 |---|---|
-| Workflows don't run on an RTX 50-series GPU: `CUDA error: no kernel image is available for the execution device`, or **Runtime → Status** shows `GPU NOT SUPPORTED BY PYTORCH` | Install 0.7.8 or newer, and make sure `nvidia-smi` shows driver 570 or newer. Then click **Update Runtime**. If you chose your own environment, upgrade its PyTorch as described in [GPU support](#nvidia-gpu-support-rtx-50-series-078-and-later). Until then, select CPU / `fp32`. |
+| Workflows don't run on an RTX 50-series GPU: `CUDA error: no kernel image is available for the execution device`, or **Runtime → Status** shows `GPU NOT SUPPORTED BY PYTORCH` | Install 0.7.8 or newer, and make sure `nvidia-smi` shows driver 570 or newer. Then click **Update Runtime**. If you chose your own environment, upgrade its PyTorch as described in [GPU support](#which-pytorch-is-installed-079-and-later). Until then, select CPU / `fp32`. |
 | Runtime install fails with `ResolutionImpossible` / "Cannot install boto3<2 and >=1.35" | A bug in 0.7.5 and 0.7.6. Install 0.7.7 or newer, then click **Update Runtime**. |
 | **Inference Runtime Setup** appears on first launch | The runtime wasn't prepared during installation. Click **Install Runtime**. |
 | Runtime setup fails while downloading | Check your internet connection or proxy, then **Runtime → Repair Runtime**. Details are in `runtime-setup.log`. |
 | The installer picked an environment you don't want | Run `vision-inference-studio-setup --use-python /path/to/python`, or delete `~/.config/vision-inference-studio/python-runtime` and run `vision-inference-studio-setup --mode auto`. |
 | "Your configured Python … is not compatible" | The interpreter you chose lacks required packages. The message lists them. Install them into that environment, or delete the `python-runtime` file to let setup choose. |
 | **Backend could not start** | Click **Retry**. If it fails again, read `backend.log` and use **Runtime → Repair Runtime**. |
-| CUDA not available in **Runtime → Status** | Check that `nvidia-smi` works and the driver is 525 or newer (570 or newer for RTX 50-series GPUs). If you use your own environment, check that its PyTorch is a CUDA build. Otherwise select CPU / `fp32`. |
+| CUDA not available in **Runtime → Status** | Check that `nvidia-smi` works and the driver is 525 or newer (570 or newer for RTX 50-series GPUs). If the NVIDIA driver was installed after the app, click **Runtime → Repair Runtime** to replace the CPU-only PyTorch with a CUDA build. If you use your own environment, check that its PyTorch is a CUDA build. Otherwise select CPU / `fp32`. |
 | RF-DETR shape or positional-encoding errors | The size or patch size doesn't match the checkpoint. See [section 6](#6-models-and-weights). |
 | "CUDA out of memory" | Close other GPU programs, or **Runtime → Restart Backend** to unload models, then run again. |
 | App closes immediately when started from a VS Code terminal | VS Code sets `ELECTRON_RUN_AS_NODE`. Start from the application menu, or run `env -u ELECTRON_RUN_AS_NODE vision-inference-studio`. |
