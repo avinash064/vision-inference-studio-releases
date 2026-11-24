@@ -10,13 +10,16 @@ This repository contains **installable packages, the user manual and release not
 
 ## Download
 
-**Latest version: 0.7.9** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.9) · [What's new](versions/0.7.9/README.md)
+**Latest Linux/Windows version: 0.7.9** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.9) · [What's new](versions/0.7.9/README.md)
 
-The installer picks the PyTorch build for your computer's GPU and driver: CPU-only, CUDA 11.8, CUDA 12.1, or CUDA 12.8 for RTX 50-series GPUs. Workflows don't run on RTX 50-series GPUs in 0.7.7 and earlier.
+**Latest macOS version: 0.7.10** (first macOS build) — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.10) · [What's new](versions/0.7.10/README.md)
+
+The installer picks the PyTorch build for your computer's GPU and driver: CPU-only, CUDA 11.8, CUDA 12.1, or CUDA 12.8 for RTX 50-series GPUs. Workflows don't run on RTX 50-series GPUs in 0.7.7 and earlier. macOS has no CUDA, so it always installs the CPU/Apple MPS build.
 
 | Version | Package | Notes |
 |---|---|---|
-| **0.7.9** (latest) | [vision-inference-studio_0.7.9_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.9/vision-inference-studio_0.7.9_amd64.deb) | [Release notes](versions/0.7.9/README.md) |
+| **0.7.10** (macOS, latest) | [Vision-Inference-Studio-darwin-arm64-0.7.10.zip](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.10/Vision-Inference-Studio-darwin-arm64-0.7.10.zip) | [Release notes](versions/0.7.10/README.md) — Apple Silicon only, unsigned (see Quick start below) |
+| **0.7.9** (Linux/Windows, latest) | [vision-inference-studio_0.7.9_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.9/vision-inference-studio_0.7.9_amd64.deb) | [Release notes](versions/0.7.9/README.md) |
 | 0.7.8 | [vision-inference-studio_0.7.8_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.8/vision-inference-studio_0.7.8_amd64.deb) | [Release notes](versions/0.7.8/README.md) |
 | 0.7.7 | [vision-inference-studio_0.7.7_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.7/vision-inference-studio_0.7.7_amd64.deb) | [Release notes](versions/0.7.7/README.md) — models don't run on RTX 50-series GPUs; use 0.7.8 |
 | 0.7.6 | [vision-inference-studio_0.7.6_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.6/vision-inference-studio_0.7.6_amd64.deb) | [Release notes](versions/0.7.6/README.md) — **private runtime install fails; use 0.7.7** |
@@ -46,6 +49,23 @@ The packages are attached to each version's [GitHub Release](https://github.com/
    The installer looks for a Python environment on your computer that already has the required packages and uses it. If none is found, it installs a private runtime for you (10–30 minutes, needs internet).
 3. Start **Vision Inference Studio** from the application menu.
 4. Add your model weights from the **Model** node's **Upload weights** button, then build your first workflow. The [User Manual](USER_MANUAL.md#4-your-first-workflow) walks you through it.
+
+## Quick start (0.7.10, macOS)
+
+**Requirements:** Apple Silicon Mac (arm64). No GPU/CUDA requirement — inference runs on CPU, with PyTorch's Apple MPS backend where supported.
+
+1. Download the `.zip` and check it:
+   ```bash
+   shasum -a 256 "Vision-Inference-Studio-darwin-arm64-0.7.10.zip"
+   # must match: 70e44a60247bd42e3983cd03d7952f1e1a16804efcbf72ce09b4a18d4559cdf4
+   ```
+2. Unzip it and move `Vision Inference Studio.app` to `/Applications` (or run it in place).
+3. This build is **not notarized** (no Apple Developer ID certificate yet), so a plain double-click is blocked by Gatekeeper the first time. Either right-click the app → **Open** → **Open** in the dialog, or run:
+   ```bash
+   xattr -dr com.apple.quarantine "/Applications/Vision Inference Studio.app"
+   ```
+4. On first launch, the app installs its private Python runtime (10–30 minutes, needs internet).
+5. Add your model weights from the **Model** node's **Upload weights** button, then build your first workflow.
 
 ## Documentation
 
