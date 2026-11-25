@@ -1,6 +1,6 @@
 # Vision Inference Studio — User Manual
 
-This manual covers **version 0.7.9** (the features of 0.7.6, the runtime install fix of 0.7.7, RTX 50-series GPU support from 0.7.8, and the PyTorch build matched to your GPU from 0.7.9). For earlier versions, see the README in [versions/](versions/); features that arrived later are marked with the version that added them.
+This manual covers **version 0.7.11** on Linux (the features of 0.7.6, the runtime install fix of 0.7.7, RTX 50-series GPU support from 0.7.8, the PyTorch build matched to your GPU from 0.7.9, and the chaiNNer and GPU-default fixes of 0.7.11). For the macOS build, see [0.7.10](versions/0.7.10/README.md). For earlier versions, see the README in [versions/](versions/); features that arrived later are marked with the version that added them.
 
 ## Contents
 
@@ -57,7 +57,7 @@ Optional extras:
 ### Install
 
 ```bash
-sudo apt install ./vision-inference-studio_0.7.9_amd64.deb
+sudo apt install ./vision-inference-studio_0.7.11_amd64.deb
 ```
 
 Then start **Vision Inference Studio** from the application menu, or run `vision-inference-studio` in a terminal.
@@ -129,7 +129,7 @@ A Python environment you chose yourself is never changed. To make it work on an 
 
 Install the newer `.deb` the same way. Your weights, workflows, recipes, benchmarks, datasets, training runs, exports and settings are kept. If the private runtime needs new packages, the installer updates it, or the app shows **Runtime update required**; click **Update Runtime**.
 
-To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.9_amd64.deb`, because `apt` skips a version that is already installed.
+To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.11_amd64.deb`, because `apt` skips a version that is already installed.
 
 ## 4. Your first workflow
 
@@ -141,7 +141,7 @@ To reinstall the same version, use `sudo dpkg -i ./vision-inference-studio_0.7.9
 4. Select the **Model** node:
    - choose the **family**, **version** and **size** that match your checkpoint;
    - click **Upload weights** and pick your checkpoint file (see [section 6](#6-models-and-weights) for accepted formats);
-   - choose **device** (CUDA or CPU) and **precision** (`fp16` on a GPU, `fp32` on the CPU);
+   - choose **device** (CUDA or CPU) and **precision** (`fp16` on a GPU, `fp32` on the CPU). From 0.7.11, a new model node starts on your NVIDIA GPU with `fp16` when you have one;
    - set the **confidence** threshold.
 5. Click **Validate**. Fix any issue it lists; each one names the node and the problem.
 6. Click **Run**.
@@ -326,6 +326,8 @@ Upgrading or uninstalling never deletes these folders.
 
 | Problem | What to do |
 |---|---|
+| Most chaiNNer nodes in the Node Library show as **Unavailable** (`No module named 'nodes.properties.outputs'`) | A packaging bug in 0.7.4 to 0.7.9: part of the bundled chaiNNer code was missing. Install 0.7.11 or newer. Nodes that name `spandrel`, `tensorrt`, `ncnn` or `facexlib` need an engine the app doesn't install and stay unavailable. |
+| A model runs on the CPU although you have an NVIDIA GPU (Live Output shows **CPU**) | Select the model node and set **Device** to your GPU (`cuda:0`) and **Precision** to `fp16`. Before 0.7.11, new model nodes started on the CPU. |
 | Workflows don't run on an RTX 50-series GPU: `CUDA error: no kernel image is available for the execution device`, or **Runtime → Status** shows `GPU NOT SUPPORTED BY PYTORCH` | Install 0.7.8 or newer, and make sure `nvidia-smi` shows driver 570 or newer. Then click **Update Runtime**. If you chose your own environment, upgrade its PyTorch as described in [GPU support](#which-pytorch-is-installed-079-and-later). Until then, select CPU / `fp32`. |
 | Runtime install fails with `ResolutionImpossible` / "Cannot install boto3<2 and >=1.35" | A bug in 0.7.5 and 0.7.6. Install 0.7.7 or newer, then click **Update Runtime**. |
 | **Inference Runtime Setup** appears on first launch | The runtime wasn't prepared during installation. Click **Install Runtime**. |

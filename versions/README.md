@@ -4,6 +4,7 @@ One folder per published version, newest first. Each README lists what changed, 
 
 | Version | Highlights |
 |---|---|
+| [0.7.11](0.7.11/README.md) | Linux: chaiNNer nodes are available again (most were unavailable in 0.7.4–0.7.9), and new model nodes start on the GPU |
 | [0.7.10](0.7.10/README.md) | **First macOS build** (Apple Silicon). No CUDA on macOS, so PyTorch/onnxruntime install as plain CPU/MPS builds |
 | [0.7.9](0.7.9/README.md) | Linux/Windows: installs the PyTorch build that matches the computer's GPU and driver: CPU-only (no NVIDIA GPU), CUDA 11.8, 12.1 or 12.8 |
 | [0.7.8](0.7.8/README.md) | NVIDIA RTX 50-series (Blackwell) GPU support: installs the CUDA 12.8 PyTorch on these GPUs; Live Output no longer crops portrait images |

@@ -10,7 +10,7 @@ This repository contains **installable packages, the user manual and release not
 
 ## Download
 
-**Latest Linux/Windows version: 0.7.9** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.9) · [What's new](versions/0.7.9/README.md)
+**Latest Linux version: 0.7.11** — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.11) · [What's new](versions/0.7.11/README.md) — fixes chaiNNer nodes showing as unavailable (0.7.4–0.7.9) and new model nodes starting on the CPU
 
 **Latest macOS version: 0.7.10** (first macOS build) — [Release page](https://github.com/avinash064/vision-inference-studio-releases/releases/tag/v0.7.10) · [What's new](versions/0.7.10/README.md)
 
@@ -18,8 +18,9 @@ The installer picks the PyTorch build for your computer's GPU and driver: CPU-on
 
 | Version | Package | Notes |
 |---|---|---|
+| **0.7.11** (Linux, latest) | [vision-inference-studio_0.7.11_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.11/vision-inference-studio_0.7.11_amd64.deb) | [Release notes](versions/0.7.11/README.md) |
 | **0.7.10** (macOS, latest) | [Vision-Inference-Studio-darwin-arm64-0.7.10.zip](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.10/Vision-Inference-Studio-darwin-arm64-0.7.10.zip) | [Release notes](versions/0.7.10/README.md) — Apple Silicon only, unsigned (see Quick start below) |
-| **0.7.9** (Linux/Windows, latest) | [vision-inference-studio_0.7.9_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.9/vision-inference-studio_0.7.9_amd64.deb) | [Release notes](versions/0.7.9/README.md) |
+| 0.7.9 (Linux) | [vision-inference-studio_0.7.9_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.9/vision-inference-studio_0.7.9_amd64.deb) | [Release notes](versions/0.7.9/README.md) — most chaiNNer nodes unavailable; use 0.7.11 |
 | 0.7.8 | [vision-inference-studio_0.7.8_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.8/vision-inference-studio_0.7.8_amd64.deb) | [Release notes](versions/0.7.8/README.md) |
 | 0.7.7 | [vision-inference-studio_0.7.7_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.7/vision-inference-studio_0.7.7_amd64.deb) | [Release notes](versions/0.7.7/README.md) — models don't run on RTX 50-series GPUs; use 0.7.8 |
 | 0.7.6 | [vision-inference-studio_0.7.6_amd64.deb](https://github.com/avinash064/vision-inference-studio-releases/releases/download/v0.7.6/vision-inference-studio_0.7.6_amd64.deb) | [Release notes](versions/0.7.6/README.md) — **private runtime install fails; use 0.7.7** |
@@ -33,18 +34,18 @@ Use the latest version unless you need an older one for a specific reason. Older
 
 The packages are attached to each version's [GitHub Release](https://github.com/avinash064/vision-inference-studio-releases/releases) because they are larger than GitHub allows for files inside a repository. Checksums for all of them are in [SHA256SUMS](SHA256SUMS).
 
-## Quick start (0.7.9)
+## Quick start (0.7.11, Linux)
 
 **Requirements:** 64-bit Ubuntu or Debian (x86_64) with a desktop session. An NVIDIA GPU is optional (driver 525 or newer; 570 or newer for RTX 50-series GPUs). Without one, the app uses the CPU.
 
 1. Download the `.deb` and check it:
    ```bash
-   sha256sum vision-inference-studio_0.7.9_amd64.deb
-   # must match: 64ac38f9e87326250c071f5830d0e4531549fc22cf8dce755a7269c41698cb4b
+   sha256sum vision-inference-studio_0.7.11_amd64.deb
+   # must match: 58f6fdef65814bccbdddf7651bbb911d12ee22aa0644d7f25382ec1c088446b0
    ```
 2. Install it:
    ```bash
-   sudo apt install ./vision-inference-studio_0.7.9_amd64.deb
+   sudo apt install ./vision-inference-studio_0.7.11_amd64.deb
    ```
    The installer looks for a Python environment on your computer that already has the required packages and uses it. If none is found, it installs a private runtime for you (10–30 minutes, needs internet).
 3. Start **Vision Inference Studio** from the application menu.
